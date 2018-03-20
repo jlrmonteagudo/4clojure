@@ -28,6 +28,11 @@
 (defn sum-all [pcoll]
   (reduce + pcoll))
 
+;; Problem #25 Find the odd numbers  
+(defn odd-numbers [pcoll]
+  (for [x pcoll :when (odd? x)]
+    x))
+
 ;; Problem #26 Fibonacci Sequence
 (defn fibonacci
   [n]
@@ -36,25 +41,23 @@
       result
       (recur (conj result (+ (last result) (last (butlast result))))))))
 
+;; other Fib
 (defn fibonacci-2
   [n]
   (let [aux (fn aux [x y]
               (lazy-seq (cons y (aux y (+ x y)))))]
     (take n (aux 0 1))))
 
+ ;; Other Fib
 (defn fibonacci-3 [nu]
   (take nu (map first (iterate (fn [[x y]] [y (+ x y)]) [1 1]))))
 
-(defn generator-from-coll
-  "Retorna una funcion que retorna un elemento de [coll] aleatoriamente"
-  [coll]
-  (fn []
-    (rand-nth coll)))
+;; Problem #27 Palindrome Detector
+(defn palindrome? [se]
+  (= (seq se) (reverse se)))
 
-;; Problem # Flat a collection    
-(defn flat-coll
-  "Aplana una colleccion de collecciones"
-  [coll]
+;; Problem #28 Flat a collection    
+(defn flat-coll [coll]
   (loop [result []
          c (vec coll)]
     (if-let [frst (first c)]
@@ -63,6 +66,12 @@
         (recur (conj result frst) (rest c)))
       result)))
 
+;; Problem #29 Get the CAPs
+(defn just-capital [string]
+  (apply str (re-seq #"[A-Z]+" string)))
+
+;; Problem #30 Compress a Sequence 
+;; fn removes consecutive duplicates from a sequence.    
 (defn remove-consecutive [sq]
   (reduce (fn [coll-result elem]
             (let [ult (last coll-result)]
@@ -71,7 +80,21 @@
                 coll-result)))
           [] sq))
 
-;; Problem #41
+;; Problem #31 Pack a Sequence
+(defn pack-sequence [coll]
+  (partition-by (fn [elem] elem) coll))
+
+;; Problem #32 Duplicate a Sequence. 
+;; Duplicate each element of a sequence  
+(defn duplicate [pcoll]
+  (reduce concat (map #(repeat 2 %) pcoll)))
+
+;; Problem #33 Replicate a Sequence.
+;; based on Problem #32 ,repeat each element n times instead of just 2 times  
+(defn replicate-ntimes [pcoll n]
+  (reduce concat (map #(repeat n %) pcoll)))
+
+ ;; Problem #41
 (defn drop-nth-elment [coll nth]
   (loop [res []
          c coll]
@@ -111,10 +134,6 @@
 (defn flipping-out [function]
   (fn [x y]
     (function y x)))
-
-;; Problem #31
-(defn pack-sequence [coll]
-  (partition-by (fn [elem] elem) coll))
 
 ;; Problem #50 Split by type
 (defn split-by-type [coll]
