@@ -2,11 +2,11 @@
   (:require 
    [clojure.set :as s]
    [clojure.java.io :as IO]
-   [clojure.core.async :as async])
-  (:import))
+   [clojure.core.async :as async]))
+  
 
-
-(defn fibonnaci
+;; Problem #26 Fibonacci Sequence
+(defn fibonacci
  "Genera los n numeros de fibonnaci"
  [n]
  (loop [result [1 1]]
@@ -14,11 +14,13 @@
      result
      (recur (conj result (+ (last result) (last (butlast result))))))))
 
-(defn fibonnaci-2
-  ([] (fibonnaci-2 0 1))
+(defn fibonacci-2
+  ([] (fibonacci-2 0 1))
   ([x y]
-   (lazy-seq (cons y (fibonnaci-2 y (+ x y))))))
+   (lazy-seq (cons y (fibonacci-2 y (+ x y))))))
 
+(defn fibonacci-3 [nu]
+ (take nu (map first (iterate (fn [[x y]] [y (+ x y)]) [1 1]))))   
 
 (defn generator-from-coll
   "Retorna una funcion que retorna un elemento de [coll] aleatoriamente"
@@ -285,7 +287,7 @@
 
 ;; Problem #80 Perfect numbers
 (defn perfect-n [number]
-  (->> (range 1 (+ 1 (/ number 2)))                          ;; Generate candidates
+  (->> (range 1 (+ 1 (/ number 2))) ;; Generate candidates
        (filter #(= 0 (rem number %)))
        (reduce +)
        (= number)))
@@ -306,6 +308,7 @@
 (defn cartesian-prod [s1 s2]
   (into #{}  (for [x s1 y s2] [x y])))
 
+
 ;;Problem #95 To Tree, or not to Tree
 (defn tree? [tree]
   (let [[root left right] tree]
@@ -316,17 +319,12 @@
      false)))
    
 
-
-
-
-
 ;;Problem #96 Beauty is Symetry
 (defn symetry? [t]
   (let [mirror (fn mirror [[root left right :as t]]
                 (if t
                   [root (mirror right) (mirror left)]))]
     (= t (mirror t))))
-
 
 ;; Problem #97 Pascal triangle
 (defn pascal [n]
@@ -542,6 +540,9 @@
                (lazy-seq
                   (cons ivalue (aux (f ivalue) (conj (vec rest) f)))))]
     (aux ivalue vf)))
+(defn nasss []
+  (println "hoals"))
+  
 
  
 
