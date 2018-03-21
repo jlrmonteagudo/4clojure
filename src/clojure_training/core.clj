@@ -94,6 +94,30 @@
 (defn replicate-ntimes [pcoll n]
   (reduce concat (map #(repeat n %) pcoll)))
 
+;; Problem #34 Implement Range
+(defn create-range [from to]
+  (take (- to from) (iterate inc from)))
+
+ ;; Problem #35 just write 7
+
+ ;; Problem #36 Let it Be 
+ ;; write [x 7 , y 3, z 1]
+
+ ;; Problem #37 Regular Expression
+ ;; write "ABC"
+
+;; Problem #38 Maximum Value
+(defn max-param [& params]
+  (reduce (fn [x y]
+            (if (> x y) x y))
+          0
+          params))
+
+ ;; Problem #39 Interleave two Seqs
+(defn interleave-two-seq [collx colly]
+  (reduce concat
+          (map #(conj [] %1 %2) collx colly)))
+
  ;; Problem #41
 (defn drop-nth-elment [coll nth]
   (loop [res []
