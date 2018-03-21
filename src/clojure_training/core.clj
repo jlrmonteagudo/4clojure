@@ -135,6 +135,10 @@
   (fn [x y]
     (function y x)))
 
+;; Problem #49
+(defn split-seq [at coll]
+  [(take at coll) (drop at coll)])
+
 ;; Problem #50 Split by type
 (defn split-by-type [coll]
   (reduce (fn [setr [_ value]]
@@ -403,15 +407,6 @@
                (transient {}))
        (persistent!)))
 
-;; Problems Rotate sequece
-(defn rotate [n coll]
-  (loop [n n
-         coll coll]
-    (cond
-      (< n 0) (recur (inc n) (conj (next coll) (first coll)))
-      (> n 0) (recur (dec n) (conj (next (reverse coll)) (first (reverse coll))))
-      :default coll)))
-
 ;; Problem #115 The Balance of N
 (defn balanced? [n]
   (let [transform (comp #(reduce + %) #(map (fn [n] (Character/getNumericValue n)) %))
@@ -547,10 +542,6 @@
         fun (xform conj)]
     (map (fn [x] [(first x) (last x)])
          (fun (reduce fun [] (sort coll))))))
-
-;; Problem #49
-(defn split-seq [at coll]
-  [(take at coll) (drop at coll)])
 
 ;; Problem #83
 (defn half-truth [& arg]
