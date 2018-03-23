@@ -109,7 +109,7 @@
 ;; Problem #38 Maximum Value
 (defn max-param [& params]
   (reduce (fn [x y]
-             (if (> x y) x y))
+            (if (> x y) x y))
           params))
 
  ;; Problem #39 Interleave two Seqs

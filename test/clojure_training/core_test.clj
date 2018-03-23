@@ -4,6 +4,4 @@
 
 (deftest test-problems
   (testing "Testin if 0=0 :-||"
-    (is (= 0 0))))            
-
-
+    (is (= 0 0))))
