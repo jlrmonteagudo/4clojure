@@ -109,8 +109,7 @@
 ;; Problem #38 Maximum Value
 (defn max-param [& params]
   (reduce (fn [x y]
-            (if (> x y) x y))
-          0
+             (if (> x y) x y))
           params))
 
  ;; Problem #39 Interleave two Seqs
@@ -577,6 +576,3 @@
               (lazy-seq
                (cons ivalue (aux (f ivalue) (conj (vec rest) f)))))]
     (aux ivalue vf)))
-(defn nasss []
-  (println "hoals"))
-
