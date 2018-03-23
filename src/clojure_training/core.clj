@@ -2,15 +2,15 @@
   (:require
    [clojure.set :as s]))
 
-;; Problem #19 Last Element
+;; Problem #19 Last Element.
 (defn last-element [pcoll]
   (first (reverse pcoll)))
 
-;; Problem #20 Penultimate Element
+;; Problem #20 Penultimate Element.
 (defn p-element [pcoll]
   (second (reverse pcoll)))
 
-;; Problem #21 Nth Element
+;; Problem #21 Nth Element.
 (defn nth-element [pcoll idx]
   (get (vec pcoll) idx))
 
@@ -19,7 +19,7 @@
 (defn count-seq [pcoll]
   (reduce (fn [x _] (+ x 1)) 0 pcoll))
 
-;; Problem #23 Reverse a Sequence
+;; Problem #23 Reverse a Sequence.
 (defn reverse-seq [pcoll]
   (let [rcoll (into () pcoll)]
     rcoll))
@@ -28,12 +28,12 @@
 (defn sum-all [pcoll]
   (reduce + pcoll))
 
-;; Problem #25 Find the odd numbers  
+;; Problem #25 Find the odd numbers.  
 (defn odd-numbers [pcoll]
   (for [x pcoll :when (odd? x)]
     x))
 
-;; Problem #26 Fibonacci Sequence
+;; Problem #26 Fibonacci Sequence.
 (defn fibonacci
   [n]
   (loop [result [1 1]]
@@ -41,22 +41,22 @@
       result
       (recur (conj result (+ (last result) (last (butlast result))))))))
 
-;; other Fib
+;; other Fib.
 (defn fibonacci-2
   [n]
   (let [aux (fn aux [x y]
               (lazy-seq (cons y (aux y (+ x y)))))]
     (take n (aux 0 1))))
 
- ;; Other Fib
+ ;; Other Fib.
 (defn fibonacci-3 [nu]
   (take nu (map first (iterate (fn [[x y]] [y (+ x y)]) [1 1]))))
 
-;; Problem #27 Palindrome Detector
+;; Problem #27 Palindrome Detector.
 (defn palindrome? [se]
   (= (seq se) (reverse se)))
 
-;; Problem #28 Flat a collection    
+;; Problem #28 Flat a collection.    
 (defn flat-coll [coll]
   (loop [result []
          c (vec coll)]
@@ -66,11 +66,11 @@
         (recur (conj result frst) (rest c)))
       result)))
 
-;; Problem #29 Get the CAPs
+;; Problem #29 Get the CAPs.
 (defn just-capital [string]
   (apply str (re-seq #"[A-Z]+" string)))
 
-;; Problem #30 Compress a Sequence 
+;; Problem #30 Compress a Sequence. 
 ;; fn removes consecutive duplicates from a sequence.    
 (defn remove-consecutive [sq]
   (reduce (fn [coll-result elem]
@@ -80,12 +80,12 @@
                 coll-result)))
           [] sq))
 
-;; Problem #31 Pack a Sequence
+;; Problem #31 Pack a Sequence.
 (defn pack-sequence [coll]
   (partition-by (fn [elem] elem) coll))
 
 ;; Problem #32 Duplicate a Sequence. 
-;; Duplicate each element of a sequence  
+;; Duplicate each element of a sequence.  
 (defn duplicate [pcoll]
   (reduce concat (map #(repeat 2 %) pcoll)))
 
@@ -94,19 +94,19 @@
 (defn replicate-ntimes [pcoll n]
   (reduce concat (map #(repeat n %) pcoll)))
 
-;; Problem #34 Implement Range
+;; Problem #34 Implement Range.
 (defn create-range [from to]
   (take (- to from) (iterate inc from)))
 
- ;; Problem #35 just write 7
+ ;; Problem #35 just write 7.
 
- ;; Problem #36 Let it Be 
+ ;; Problem #36 Let it Be.
  ;; write [x 7 , y 3, z 1]
 
- ;; Problem #37 Regular Expression
+ ;; Problem #37 Regular Expression.
  ;; write "ABC"
 
-;; Problem #38 Maximum Value
+;; Problem #38 Maximum Value.
 (defn max-param [& params]
   (reduce (fn [x y]
             (if (> x y) x y))
@@ -117,7 +117,11 @@
   (reduce concat
           (map #(conj [] %1 %2) collx colly)))
 
- ;; Problem #41
+;; Problem #40 Interpose a Seq.
+(defn interpose-cousin [sep coll]
+  (drop-last (interleave coll (repeat sep))))
+
+ ;; Problem #41 Drop Every Nth Item.
 (defn drop-nth-elment [coll nth]
   (loop [res []
          c coll]
@@ -127,15 +131,11 @@
        (concat res (take (dec nth) c))
        (drop nth c)))))
 
-;; Problem #41
-(defn drop-nth-other [coll nth]
-  (let [result (transient (empty coll))]
-    (dotimes [n (count coll)]
-      (when (not= n (- nth 1))
-        (conj! result (coll n))))
-    (persistent! result)))
+;; Problem #42 Factorial Fun.
+(defn fact [n]
+  (reduce * (range 1 (inc n))))
 
-;; Problem #43 reverse interleave
+;; Problem #43 reverse interleave.
 (defn rev-interleave [coll nc]
   (let [part (quot (count coll) nc)]
     (->> coll
