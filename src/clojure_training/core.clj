@@ -143,7 +143,7 @@
          (apply interleave)
          (partition part))))
 
-;; Problem #44 rotate sequence
+;; Problem #44 rotate sequence.
 (defn rotate [nn coll]
   (loop [n nn
          c coll]
@@ -153,12 +153,21 @@
         (recur (inc n) (cons (last c) (butlast c)))
         (recur (dec n) (conj (vec (rest c)) (first c)))))))
 
-;;Problem #46 Flipping-out
+;; Problem #45 Intro to Iterate.
+;; write '( 1 4 7 10 13)        
+
+;; Problem #46 Flipping-out
 (defn flipping-out [function]
   (fn [x y]
     (function y x)))
 
-;; Problem #49
+;; Problem #47 Contain Yourself.
+;; write 4
+
+;; Problem #48 Intro to some.
+;; write 6
+
+;; Problem #49 Split a sequence.
 (defn split-seq [at coll]
   [(take at coll) (drop at coll)])
 
@@ -169,9 +178,15 @@
           #{}
           (group-by type coll)))
 
-;;Problem #53 Longest Incresing subsequence
+;; Problem #51 Advanced Destructuring.
+;; write [1 2 3 4 5]
+
+;; Problem #52 Intro to Destructuring.
+;; write [c e]
+
+;; Problem #53 Longest Incresing subsequence.
 (defn longest-inc-subseq [coll]
-  (let [inc-subseq (fn []                                    ;;I get courage and I tried to make a transducer.Maybe It'snt
+  (let [inc-subseq (fn []          ;;I get courage and I tried to make a transducer.Maybe It'snt
                      (fn [rf]
                        (let [a (java.util.ArrayList.)
                              pv (atom ::none)]
@@ -204,7 +219,7 @@
       []
       (apply max-key count candidates))))
 
-;;Problem #54 Partition a sequence
+;; Problem #54 Partition a sequence.
 (defn part-seq [n coll]
   (loop [result []
          c coll]
@@ -213,7 +228,7 @@
         (recur (conj result part) (drop n c))
         result))))
 
-;; Problem #55 Count occurrences
+;; Problem #55 Count occurrences.
 (defn occurrence-count [coll]
   (->> (group-by identity coll)
        (reduce (fn [result [k v]]
@@ -227,6 +242,9 @@
               res
               (conj res items)))
           [] coll))
+
+;; Problem #57 Simple Recursion.
+;; write '(5 4 3 2 1)          
 
 ;; Problem #58 Function composition
 (defn fn-comp [& fns]
